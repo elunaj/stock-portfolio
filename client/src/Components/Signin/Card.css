@@ -1,0 +1,8 @@
+.Card {
+	display: grid;
+	margin: auto;
+	padding: 1rem 1rem;
+	width: 16rem;
+	text-align: center;
+	margin-top: 4rem;
+}
