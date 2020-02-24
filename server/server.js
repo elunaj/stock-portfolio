@@ -34,7 +34,6 @@ const db = knex({
 });
 
 // API endpoints
-
 app.get('/', (req, res) => {
 	res.send('Root!');
 })
@@ -47,7 +46,7 @@ app.post('/register', (req, res) => {
 	register.handleRegister(req, res, db, bcrypt);
 });
 
-
+// Port connection
 app.listen(PORT, () => {
 	console.log(`App is listening on port ${PORT}`);
 })
