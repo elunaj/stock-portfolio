@@ -1,0 +1,7 @@
+.trans {
+	display: block;
+	height: 6rem;
+	width: 20rem;
+	margin: 20px auto;
+	border: solid 0.5px black;
+}
