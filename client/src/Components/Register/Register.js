@@ -6,7 +6,7 @@ import '../Signin/Card.css';
 // Regex used to compare user email against
 // If user email doesn't match regex pattern, we 
 // add error message to errorForm state
-const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 
 // Checks for errors in formError state
@@ -116,7 +116,7 @@ class Register extends React.Component {
 		.then(response => response.json())
 		.then(user => {
 			if (user.id) {
-				// this.props.loadUser(user);
+				this.props.loadUser(user);
 				this.props.onRouteChange('portfolio');
 				this.setState({
 					errorMessage: ''
