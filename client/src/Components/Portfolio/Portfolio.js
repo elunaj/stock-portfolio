@@ -1,17 +1,21 @@
 import React from 'react';
 import PurchaseStock from '../PurchaseStock/PurchaseStock';
+import { Typography, Card, CardContent } from '@material-ui/core';
+import './Portfolio.css';
 
 export default class Portfolio extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			totalCost: null
+			totalCost: null,
+			transactionGetStatus: this.props.transactionGetStatus
 		}
 	}
 
-	componentDidUpdate() {
-		this.props.updateUserAccountInfo();
+	componentDidMount() {
+		this.props.findUserTransactions();
 	}
+
 
 	calculateStockPurchaseCost = (stockPrice, quantity) => {
 
@@ -30,17 +34,47 @@ export default class Portfolio extends React.Component {
 
 	render() {
 
-
-			console.log(this.props)
+		console.log(this.props)
 			
 		return (
 			<div>
+
 				<div>
-					Account balance{this.props.userAccountBalance}
-				</div>
+				{this.props.transactionGetStatus 
+
+				?	(this.props.userTransCollection.map( (transaction, i) => {
+				 			return (
+				 				<Card className="port" key={i}>
+							   
+							        <CardContent style={{
+							        	'color': '#00008B',
+							        	'backgroundColor': '#F0F0F0',
+							        	'fontWeight': '500',
+							        	'textDecoration': 'underline'
+							        }}>
+							          <Typography gutterBottom variant="h6" component="h2">
+							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{transaction.stock_price}
+							          </Typography>							        
+							        </CardContent>
+							    </Card>
+				 			);
+				 		})
+				 	)
+
+			 	: null }
+			 	
+			</div>
+				 <Typography 
+                  style={{
+                    'marginTop': '2.5rem',
+                    'display': 'block'
+                  }}
+                  variant="h6">Account balance:{' $'}{this.props.userAccountBalance}
+                </Typography>
+
 				<PurchaseStock  
+					userAccountBalance={this.props.userAccountBalance}
 					userId={this.props.userId}
-					userAccountBalance={this.props.userAccountBalance} 
 					handleUserInputChange={this.props.handleUserInputChange}
                     handleUserStockLookUp={this.props.handleUserStockLookUp}
                     handleUserPurchase={this.props.handleUserPurchase}
@@ -48,12 +82,10 @@ export default class Portfolio extends React.Component {
                     stockPrice={this.props.stockPrice}
                     stockSymbol={this.props.stockSymbol}
                     calculateStockPurchaseCost={this.state.calculateStockPurchaseCost}
-                    totalCost={this.state.totalCost}
                     userQuantity={this.props.userQuantity}
                     handleUserQuantityChange={this.props.handleUserQuantityChange}
                     typeError={this.props.typeError}
-
-	                />
+	            />
 			</div>
 		);
 	}

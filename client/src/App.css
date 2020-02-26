@@ -2,37 +2,140 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
+.App a img:hover {
+	background-color: #D3D3D3;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App a img {
+	margin-right: 20px;
+	margin-left: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Display-track {
+    display: inline-block;
+   	padding: 5px;
+   	margin-top: 1.5rem;
+   	margin-bottom: 1.5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.textfield {
+	width: 20rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#email {
+	color: #080808;
+}
+
+@media (max-width: 520px) {
+	#email {
+		
+	}
+}
+          
+
+@media (max-width: 500px) {
+	header .MuiTypography-root {
+		font-size: 1rem;
+	}
+
+	.main .MuiTypography-h3 {
+		font-size: 2rem;
+	}
+
+	.main .MuiTypography-h4 {
+		font-size: 1.7rem;
+	}
+
+	.main .makeStyles-root-293 {
+    	max-width: 200px;
+    	min-width: 200px;
+    	margin-top: 1.5rem;
+    	margin-bottom: 1.5rem;
+	}
+
+	.main .textfield {
+		width: 18rem;
+	}
+
+	img {
+		width: 150;
+		height: 150;
+	}
+
+	header .MuiButton-label {
+		font-size: 0.75rem;
+	}
+
+	.tc {
+    	height: 21rem;
+    	width: 18rem;
+	}
+}
+
+
+@media (max-width: 440px) {
+	header .MuiButton-label {
+		font-size: 0.70rem;
+	}
+
+	.main .MuiTypography-h3 {
+		font-size: 1.7rem;
+	}
+
+	.main .MuiTypography-h4 {
+		font-size: 1.4rem;
+	}
+
+	.App .MuiToolbar-root .MuiGrid-container {
+		flex-wrap: nowrap;
+		width: 100%;
+	}
+
+	.App .MuiToolbar-root .MuiButtonBase-root {
+		min-width: 55px;
+	}
+	
+
+	.tc {
+    	height: 22rem;
+    	width: 15rem;
+	}
+
+	.App .marginRight {
+		height: 2.6rem;
+		width: 2.6rem;
+	}
+}
+
+
+@media (max-width: 400px) {
+	header .MuiTypography-root {
+		font-size: .75rem;
+	}
+
+	header .MuiButton-label {
+		font-size: 0.60rem;
+	}
+
+	.App .marginRight {
+		height: 2.2rem;
+		width: 2.2rem;
+	}
+
+	.App .MuiToolbar-gutters {
+		padding-left: 6px;
+		padding-right: 6px;
+	}
+
+}
+
+@media (max-width: 360px) {
+
+	.main .MuiTypography-h4 {
+		font-size: 1.2rem;
+	}
+
+	.App .MuiButton-text {
+		padding: 3px 4px;
+	}
 }

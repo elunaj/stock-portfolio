@@ -19,15 +19,6 @@ export default class Transactions extends React.Component {
 
 	componentDidMount() {
 		this.props.findUserTransactions();
-
-		
-	}
-
-	componentDidUpdate() {
-		
-		console.log(this.props.userTransCollection)
-		console.log('props', this.props.transactionGetStatus)
-		console.log('state' ,this.state.transactionGetStatus)
 	}
 
 	render() {
@@ -40,12 +31,14 @@ export default class Transactions extends React.Component {
 				 			return (
 				 				<Card className="trans" key={i}>
 							   
-							        <CardContent>
-							          <Typography gutterBottom variant="h5" component="h2">
+							        <CardContent style={{
+							        	'color': '#00008B',
+							        	'backgroundColor': '#F0F0F0',
+							        	'fontWeight': '500',
+							        	'textDecoration': 'underline'
+							        }}>
+							          <Typography gutterBottom variant="h6" component="h2">
 							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{transaction.stock_price}
-							          </Typography>	
-							          <Typography gutterBottom variant="h5" component="h2">
-							            Date: 
 							          </Typography>							        
 							        </CardContent>
 							    </Card>

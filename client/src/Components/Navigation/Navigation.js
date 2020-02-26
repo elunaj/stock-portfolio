@@ -9,7 +9,10 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 		if(isSignedIn) {
 			return (
 
-				<AppBar position="static">
+				<AppBar position="static" 
+					style={{
+						'background-color': 'black'
+					}}>
 
 				  <Toolbar>
 				    <Grid 
@@ -46,7 +49,7 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 				    	<Typography 
 						 	style={{'marginLeft': '5px'}}
 					    	variant="h6">
-					      ||
+					      |
 				    	</Typography>
 
 				 		<Button 
@@ -58,7 +61,7 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 						 <Typography 
 						 	style={{'marginLeft': '5px'}}
 					    	variant="h6">
-					      ||
+					      |
 				    	</Typography>
 
 					    <Button 
@@ -74,7 +77,13 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 		} else {
 			return (
 
-				<AppBar position="static" className="MuiAppBar-colorPrimary">
+				<AppBar 
+					position="static" 
+					className="MuiAppBar-colorPrimary"
+					style={{
+						'background-color': 'black'
+					}}
+					>
 				  <Toolbar>
 
 				  <Grid

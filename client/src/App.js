@@ -20,6 +20,7 @@ const initialState = {
       id: "",
       accountBalance: null
   },
+  userBalanceFound: false,
   stockSymbol: '',
   stockPrice: null,
   stockFound: false,
@@ -57,7 +58,7 @@ loadUser = (data) => {
   console.log('user', data)
   this.setState({user: {
     id: data.id,
-    accountBalance: Number(data.cash)
+    accountBalance: Number(data.cash),
   }})
 };
 
@@ -134,9 +135,14 @@ handleUserPurchase = () => {
   })
   .then(response => response.json())
   .then(tr => {
-
     console.log('update user')
-    this.updateUserAccountInfo();
+    this.setState({user: {
+      id: this.state.user.id,
+      accountBalance: Number(this.state.user.accountBalance) - (Number(this.state.stockPrice) * Number(this.state.userQuantity))
+    }
+    })
+    
+
   })
   .catch(console.log)
 };
@@ -170,8 +176,8 @@ findUserTransactions = () => {
   fetch('http://localhost:5000/transactions/' + this.state.user.id, {
     method: 'get',
     headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
       },
   })
   .then(response => { 
@@ -205,8 +211,8 @@ onRouteChange = (route) => {
   })
 };
 
-componentDidMount() {
-  this.findUserTransactions();
+componentDidUpdate() {
+
 }
 
 
@@ -240,8 +246,10 @@ render() {
         ) : this.state.route ==='portfolio' 
           ? ( 
               <div>
-                <Portfolio 
-                  updateUserAccountInfo={this.updateUserAccountInfo} 
+                <Portfolio
+                  findUserTransactions={this.findUserTransactions}
+                  userTransCollection={[...this.state.userTransCollection]} 
+                  transactionGetStatus={this.state.transactionGetStatus}  
                   userId={this.state.user.id}
                   userAccountBalance={this.state.user.accountBalance}
                   handleUserInputChange={this.handleUserInputChange}
