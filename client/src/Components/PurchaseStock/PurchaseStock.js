@@ -9,7 +9,8 @@ const PurchaseStock = ({ handleUserStockLookUp, handleUserInputChange,
   handleUserPurchase, stockFound, stockPrice, stockSymbol, 
   calculateStockPurchaseCost, userAccountBalance, userQuantity,
   handleUserQuantityChange, typeError }) => {
-	return (
+	
+  return (
 
     <div>
       <Card className="Card">

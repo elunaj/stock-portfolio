@@ -2,7 +2,8 @@ import React from 'react';
 import Navigation from './Components/Navigation/Navigation';
 import Signin from './Components/Signin/Signin';
 import Register from './Components/Register/Register';
-import Portfolio from './Components/Portfolio/Portfolio';
+import PortfolioView from './Components/PortfolioView/PortfolioView';
+import PurchaseParent from './Components/PurchaseParent/PurchaseParent';
 import Transactions from './Components/Transactions/Transactions';
 import Footer from './Components/Footer/Footer';
 import { Typography } from '@material-ui/core';
@@ -200,7 +201,7 @@ onRouteChange = (route) => {
   if (route === 'signout' || route ==='signin' || 
     route ==='register') {
     this.setState(initialState);
-  } else if (route === 'portfolio') {
+  } else if (route === 'buy') {
     this.setState({
       isSignedIn: true,
       initialState: initialState
@@ -210,11 +211,6 @@ onRouteChange = (route) => {
     route: route
   })
 };
-
-componentDidUpdate() {
-
-}
-
 
 render() {
     return (
@@ -236,6 +232,7 @@ render() {
               </div>
 
         ) : this.state.route ==='register' 
+         
           ? ( <div>
                 <Register 
                   loadUser={this.loadUser}
@@ -243,10 +240,11 @@ render() {
                 <Footer/>
               </div>
           
-        ) : this.state.route ==='portfolio' 
+        ) : this.state.route ==='buy' 
+          
           ? ( 
               <div>
-                <Portfolio
+                <PurchaseParent
                   findUserTransactions={this.findUserTransactions}
                   userTransCollection={[...this.state.userTransCollection]} 
                   transactionGetStatus={this.state.transactionGetStatus}  
@@ -264,9 +262,7 @@ render() {
                   />
                 <Footer/>
                </div>
-          ) : this.state.route === 'transactions'
-
-
+          ) : this.state.route === 'portfolio'
 
           ? ( 
               <div>
@@ -275,22 +271,40 @@ render() {
                     'marginTop': '2.5rem',
                     'display': 'block'
                   }}
-                  variant="h3">Transaction History:
-                </Typography>
-                <Transactions
+                  variant="h3">Portfolio Holdings:
+                  </Typography>
+                <PortfolioView
                   findUserTransactions={this.findUserTransactions}
                   userTransCollection={[...this.state.userTransCollection]} 
-                  transactionGetStatus={this.state.transactionGetStatus}
+                  transactionGetStatus={this.state.transactionGetStatus}  
                   />
                 <Footer/>
-              </div>
+               </div>
+          ) : this.state.route === 'transactions'
 
+            ? ( 
+                <div>
+                  <Typography 
+                    style={{
+                      'marginTop': '2.5rem',
+                      'display': 'block'
+                    }}
+                    variant="h3">Transaction History:
+                  </Typography>
+                  <Transactions
+                    findUserTransactions={this.findUserTransactions}
+                    userTransCollection={[...this.state.userTransCollection]} 
+                    transactionGetStatus={this.state.transactionGetStatus}
+                    />
+                  <Footer/>
+                </div>
+
+              : null
+            )
             : null
-          )
-          : null
-      } 
-      </div>
-  );
+        } 
+        </div>
+    );
 }
 }
 

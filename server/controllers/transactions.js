@@ -1,7 +1,9 @@
 const handleTransactionAdd = (req, res, db) => {
 
+console.log('res');
 	const { id, stockSymbol, userQuantity, 
 		stockPrice, totalCost, userAccountBalance } = req.body;
+
 
 	db.transaction(trx => {
 			trx('users')
@@ -15,7 +17,7 @@ const handleTransactionAdd = (req, res, db) => {
 						user_id: id,
 						symbol: stockSymbol,
 						shares: userQuantity,
-						stock_price: stockPrice 
+						stock_price: stockPrice
 					})
 				.then(user => {
 					res.json(user[0])

@@ -8,6 +8,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const searchRouter = require('./routes/search');
+const pg = require('pg');
+const PG_DECIMAL_OID = 1700;
+pg.types.setTypeParser(PG_DECIMAL_OID, parseFloat);
 const knex = require('knex');
 
 // Controllers

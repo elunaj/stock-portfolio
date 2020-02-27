@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
-// import Logo from '../Images/logo.svg';
+import Logo from '../Images/logo.svg';
 import './Navigation.css';
 
 
@@ -8,10 +8,10 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 		
 		if(isSignedIn) {
 			return (
-
+				// signed in view
 				<AppBar position="static" 
 					style={{
-						'background-color': 'black'
+						'backgroundColor': '#31572C'
 					}}>
 
 				  <Toolbar>
@@ -23,26 +23,38 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 				  	>
 				  	<img 
 				  		className="marginRight"
-				  		// src={Logo} 
+				  		src={Logo} 
 		                height="50" 
 		                width="50"
 		                alt="Logo"
 		                  />  
 				     <Typography variant="h6">
-				      Stock App
+				      MoneyBuddy
 				    </Typography>
 				    </Grid>
 
 				    <Grid 
-				    	container
+				     	container
 						direction="row"
 						alignItems = 'center'
 						justify="flex-end"
 				    	>	
 
 				    	<Button 
-				    	color="inherit"
-				    	onClick={() => onRouteChange('portfolio')}
+				    		color="inherit"
+				    		onClick={() => onRouteChange('buy')}
+				    	>Buy
+				    	</Button> 
+
+				    	<Typography 
+						 	style={{'marginRight': '5px'}}
+					    	variant="h6">
+					      |
+				    	</Typography>
+
+				    	<Button 
+				    		color="inherit"
+				    		onClick={() => onRouteChange('portfolio')}
 				    	>Portfolio
 				    	</Button> 
 
@@ -53,8 +65,8 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 				    	</Typography>
 
 				 		<Button 
-				    	color="inherit"
-				    	onClick={() => onRouteChange('transactions')}
+				    		color="inherit"
+				    		onClick={() => onRouteChange('transactions')}
 				    	>Transactions
 				    	</Button> 
 
@@ -76,12 +88,12 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 			);
 		} else {
 			return (
-
+				// registration/sign in view
 				<AppBar 
 					position="static" 
 					className="MuiAppBar-colorPrimary"
 					style={{
-						'background-color': 'black'
+						'backgroundColor': '#31572C'
 					}}
 					>
 				  <Toolbar>
@@ -94,13 +106,13 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 				  	>
 				  	<img 
 				  		className="marginRight"
-				  		// src={Logo} 
+				  		src={Logo} 
 		                height="50" 
 		                width="50"
 		                alt="Logo"
 		                  />  
 				    <Typography variant="h6">
-				      Stock App
+				       MoneyBuddy
 				    </Typography>
 				    </Grid>
 

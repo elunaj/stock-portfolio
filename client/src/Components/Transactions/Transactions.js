@@ -18,6 +18,7 @@ export default class Transactions extends React.Component {
 	}
 
 	componentDidMount() {
+		// makes call to pull user's transaction history
 		this.props.findUserTransactions();
 	}
 
@@ -38,7 +39,7 @@ export default class Transactions extends React.Component {
 							        	'textDecoration': 'underline'
 							        }}>
 							          <Typography gutterBottom variant="h6" component="h2">
-							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{transaction.stock_price}
+							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{Number(transaction.stock_price)}
 							          </Typography>							        
 							        </CardContent>
 							    </Card>

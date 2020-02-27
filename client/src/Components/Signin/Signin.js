@@ -38,7 +38,7 @@ class Signin extends React.Component {
 		.then(user => {
 			if (user.id) {
 				this.props.loadUser(user);
-				this.props.onRouteChange('portfolio');
+				this.props.onRouteChange('buy');
 			} else {
 				this.setState({
 					errorMessage: 'error signing in'

@@ -102,6 +102,10 @@ class Register extends React.Component {
 
 	}
 
+	// handles user registration
+	// if registration passes validation
+	// tests and email is unique user is added
+	// and redirected to buy page
 	onSubmitRegister = () => {
 
 		fetch('http://localhost:5000/register', {
@@ -117,7 +121,7 @@ class Register extends React.Component {
 		.then(user => {
 			if (user.id) {
 				this.props.loadUser(user);
-				this.props.onRouteChange('portfolio');
+				this.props.onRouteChange('buy');
 				this.setState({
 					errorMessage: ''
 				})
