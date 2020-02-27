@@ -1,0 +1,9 @@
+.port {
+	display: block;
+	height: 4rem;
+	width: 20rem;
+	text-align: center;
+	margin: 20px auto;
+	padding-top: 0px;
+	border: solid 0.5px black;
+}
