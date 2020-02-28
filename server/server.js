@@ -18,7 +18,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const transactions = require('./controllers/transactions');
-
+const portfolio = require('./controllers/portfolio');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -67,6 +67,10 @@ app.post('/transactions', (req, res) => {
 
 app.get('/transactions/:id', (req, res) => {
   transactions.handleTransactionsGet(req, res, db);
+});
+
+app.get('/portfolio/:id', (req, res) => {
+  portfolio.handlePortfolioGet(req, res, db);
 });
 
 // Port connection

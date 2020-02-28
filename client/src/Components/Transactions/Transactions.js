@@ -13,7 +13,7 @@ export default class Transactions extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            transactionGetStatus: this.props.transactionGetStatus
+            
 		}
 	}
 
@@ -29,7 +29,8 @@ export default class Transactions extends React.Component {
 				{this.props.transactionGetStatus 
 
 				?	(this.props.userTransCollection.map( (transaction, i) => {
-				 			return (
+				 	
+					 	return (
 				 				<Card className="trans" key={i}>
 							   
 							        <CardContent style={{

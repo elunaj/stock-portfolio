@@ -29,6 +29,8 @@ const initialState = {
   loading: false,
   transactionGetStatus: false,
   userTransCollection: [],
+  portfolioGetStatus: false,
+  userPortfolioCollection: []
 };
 
 class App extends React.Component {
@@ -51,6 +53,8 @@ constructor(props) {
     loading: false,
     transactionGetStatus: false,
     userTransCollection: [],
+    portfolioGetStatus: false,
+    userPortfolioCollection: []
   };
 }
 
@@ -185,12 +189,36 @@ findUserTransactions = () => {
     if (!response.ok) {
       throw response;
     }
-    return response.json()
+    return response.json();
   })
   .then(transactions => {
     this.setState({
       userTransCollection: [...transactions],
       transactionGetStatus: true
+    })
+  })
+  .catch(err => console.log)
+}
+
+// Finds user portfolio (stock symbol and num of shares owned)
+findUserPortfolio = () => {
+  fetch('http://localhost:5000/portfolio/' + this.state.user.id, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw response;
+    }
+    return response.json();
+  })
+  .then(portfolio => {
+    this.setState({
+      userPortfolioCollection: [...portfolio],
+      portfolioGetStatus: true
     })
   })
   .catch(err => console.log)
@@ -274,9 +302,10 @@ render() {
                   variant="h3">Portfolio Holdings:
                   </Typography>
                 <PortfolioView
-                  findUserTransactions={this.findUserTransactions}
-                  userTransCollection={[...this.state.userTransCollection]} 
-                  transactionGetStatus={this.state.transactionGetStatus}  
+                  findUserPortfolio={this.findUserPortfolio}
+                  userPortfolioCollection={[...this.state.userPortfolioCollection]} 
+                  portfolioGetStatus={this.state.portfolioGetStatus} 
+                  userId={this.state.user.id} 
                   />
                 <Footer/>
                </div>

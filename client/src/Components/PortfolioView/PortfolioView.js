@@ -7,56 +7,27 @@ export default class Portfolio extends React.Component {
 		super(props);
 		this.state = {
 			transactionGetStatus: this.props.transactionGetStatus,
-			userCollectionLoaded: [...this.props.userTransCollection],
-			userCollectionMap: [],
-			userMapReady: false
 		}
 	}
 
-	// groups stocks by symbol
-	groupTest = (list, keyGetter) => {
-		const map = new Map();
-		list.forEach((item) => {
-			const key = keyGetter(item);
-			const collection = map.get(key);
-
-			if(!collection) {
-				map.set(key, [item]);
-			} else {
-				collection.push(item);
-			}
-		});
-
-		this.setState({
-			userCollectionMap: [...map],
-			userMapReady: true
-				})
-		return map;
-	}
 
 	componentDidMount() {
-		this.props.findUserTransactions();
+		this.props.findUserPortfolio();
 	}
-
-	componentDidUpdate() {
-			if (this.state.userCollectionLoaded && !this.state.userMapReady) {
-			const test = this.groupTest(this.props.userTransCollection, stock => stock.symbol);
-			console.log(this.state.userCollectionMap)
-		}
-	}
-
 
 
 	render() {
 
 		console.log(this.props)
 		console.log(this.state.userCollectionMap)
+
+
 			
 		return (
 			<div>
-				{this.state.userCollectionMap 
+				{this.props.portfolioGetStatus
 
-				?	(this.state.userCollectionMap.map( (stock, i) => {
+				?	(this.props.userPortfolioCollection.map( (stock, i) => {
 				 			return (
 				 				<Card className="port" key={i}>
 							   
@@ -67,7 +38,7 @@ export default class Portfolio extends React.Component {
 							        	'textDecoration': 'underline'
 							        }}>
 							          <Typography gutterBottom variant="h6" component="h2">
-							            ({stock[0]}) - {' '}{stock[1][0].shares}{' shares '}-{' $ '}
+							            {stock.symbol}{' - '}{Number(stock.sum)}{' $5,000'}
 							          </Typography>							        
 							        </CardContent>
 							    </Card>
