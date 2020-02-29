@@ -98,7 +98,7 @@ handleUserStockLookUp = (event) => {
 
 // Finds transaction info from user input
 findStock() {
-  fetch('http://localhost:5000/search/' + this.state.userQuery, {
+  fetch('https://stark-taiga-05033.herokuapp.com/search/' + this.state.userQuery, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -122,7 +122,7 @@ findStock() {
 
   // Handles user purchase
 handleUserPurchase = () => {
-  fetch('http://localhost:5000/transactions', {
+  fetch('https://stark-taiga-05033.herokuapp.com/transactions', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -148,7 +148,7 @@ handleUserPurchase = () => {
 
 //Update user account balance after stock purchase
 updateUserAccountInfo = () => {
-  fetch('http://localhost:5000/profile/' + this.state.user.id, {
+  fetch('https://stark-taiga-05033.herokuapp.com/profile/' + this.state.user.id, {
     method: 'get',
     headers: {
       'Accept': 'application/json',
@@ -172,7 +172,7 @@ updateUserAccountInfo = () => {
 
 // Finds users transactions
 findUserTransactions = () => {
-  fetch('http://localhost:5000/transactions/' + this.state.user.id, {
+  fetch('https://stark-taiga-05033.herokuapp.com/transactions/' + this.state.user.id, {
     method: 'get',
     headers: {
       'Accept': 'application/json',
@@ -196,7 +196,7 @@ findUserTransactions = () => {
 
 // Finds user portfolio (stock symbol and num of shares owned)
 findUserPortfolio = () => {
-  fetch('http://localhost:5000/portfolio/' + this.state.user.id, {
+  fetch('https://stark-taiga-05033.herokuapp.com/portfolio/' + this.state.user.id, {
     method: 'get',
     headers: {
       'Accept': 'application/json',

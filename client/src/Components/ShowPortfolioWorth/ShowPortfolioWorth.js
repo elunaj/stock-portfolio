@@ -35,7 +35,7 @@ export default class ShowPortfolioWorth extends React.Component {
 
 		// creates an array of promises. One promise per stock in a user's portfolio
 		const promises = array.map(item => {
-			return fetch('http://localhost:5000/search/' + item.symbol, {
+			return fetch('https://stark-taiga-05033.herokuapp.com/search/' + item.symbol, {
 			    method: 'GET',
 			    headers: {
 			      'Accept': 'application/json',
