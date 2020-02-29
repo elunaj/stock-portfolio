@@ -1,6 +1,7 @@
 require('dotenv').config({ path: './.env'});
 
 const express = require('express');
+const path = require('path');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -21,6 +22,9 @@ const transactions = require('./controllers/transactions');
 const portfolio = require('./controllers/portfolio');
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Middleware
 app.use(logger('dev'));
@@ -71,6 +75,12 @@ app.get('/transactions/:id', (req, res) => {
 
 app.get('/portfolio/:id', (req, res) => {
   portfolio.handlePortfolioGet(req, res, db);
+});
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 // Port connection

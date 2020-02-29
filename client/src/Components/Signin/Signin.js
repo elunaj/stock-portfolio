@@ -36,6 +36,10 @@ class Signin extends React.Component {
 		})
 		.then(response => response.json())
 		.then(user => {
+
+			// if successful signin,
+			// we load user info into state
+			// and reroute to buy page
 			if (user.id) {
 				this.props.loadUser(user);
 				this.props.onRouteChange('buy');

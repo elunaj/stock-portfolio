@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Spinner from '../Spinner/Spinner';
 import Typography from '@material-ui/core/Typography';
 import './Transactions.css';
 
@@ -17,7 +18,13 @@ export default class Transactions extends React.Component {
 		this.props.findUserTransactions();
 	}
 
-	render() {
+	render() { 
+
+			// currency formatter
+			const formatter = new Intl.NumberFormat('en-US', {
+			  style: 'currency',
+			  currency: 'USD',
+			});
 
 		return (
 			<div>
@@ -35,7 +42,7 @@ export default class Transactions extends React.Component {
 							        	'textDecoration': 'underline'
 							        }}>
 							          <Typography gutterBottom variant="h6" component="h2">
-							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{Number(transaction.stock_price)}
+							            Buy{' '}({transaction.symbol}) - {' '}{transaction.shares}{' @ '}{' '}{formatter.format(transaction.stock_price)}
 							          </Typography>							        
 							        </CardContent>
 							    </Card> : null
@@ -43,7 +50,7 @@ export default class Transactions extends React.Component {
 				 		})
 				 	) 
 
-			 	: null }
+			 	: <Spinner/> }
 			 	
 			</div>
 		);

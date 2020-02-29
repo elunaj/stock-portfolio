@@ -1,5 +1,6 @@
 const handlePortfolioGet = (req, res, db) => {
 
+	// returns portfolio from user transaction db
 	db.select('symbol')
 		.sum('shares')
 		.from('transactions')

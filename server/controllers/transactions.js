@@ -1,9 +1,10 @@
+// adds transaction to db
 const handleTransactionAdd = (req, res, db) => {
 	
 	const { id, stockSymbol, userQuantity, 
 		stockPrice, totalCost, userAccountBalance } = req.body;
 
-
+		
 	db.transaction(trx => {
 			trx('users')
 			.where('id', id)
@@ -29,6 +30,7 @@ const handleTransactionAdd = (req, res, db) => {
 		.catch(err => res.status(400).json('Unable to post transaction'));
 }
 
+// returns all transactions from db
 const handleTransactionsGet = (req, res, db) => {
 
 	db.select('*').from('transactions')

@@ -5,7 +5,7 @@ import { FormControl, InputLabel, Input, FormHelperText,
 const PurchaseStock = ({ handleUserStockLookUp, handleUserInputChange, 
   handleUserPurchase, stockFound, stockPrice, stockSymbol, 
   calculateStockPurchaseCost, userAccountBalance, userQuantity,
-  handleUserQuantityChange, typeError }) => {
+  handleUserQuantityChange, typeError, successfulPurchase }) => {
 	
   return (
 
@@ -104,6 +104,9 @@ const PurchaseStock = ({ handleUserStockLookUp, handleUserInputChange,
               </FormControl>
           </Grid>
 
+          {/*  Conditionally available button, so long as stock is found,
+               no errors have been found in user input, and stockPrive * quantity
+               is less than user account balance */}
           <Grid item xs={12}>
             <FormControl>
                <Button 
@@ -118,6 +121,26 @@ const PurchaseStock = ({ handleUserStockLookUp, handleUserInputChange,
                 </Button>
             </FormControl>
           </Grid>
+
+          <Grid 
+            container
+            direction="row"
+            alignItems= "center"
+            justify="center"
+                >  { successfulPurchase
+               
+                ? ( <FormHelperText 
+                      style={{'color': '#00008B',
+                      'fontSize': '1rem',
+                      'marginBottom': '1rem'
+                    }}
+                      id="helper-text">
+                    {'Successful purchase'}
+                  </FormHelperText>
+
+              ) : null}
+
+            </Grid>
 
       </Grid>
     </Card>

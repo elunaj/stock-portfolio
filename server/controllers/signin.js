@@ -10,6 +10,8 @@ const handleSignin = (req, res, db, bcrypt) => {
 	db.select('email', 'hash').from('login')
 		.where('email', '=', email)
 		.then(data => {
+			// compare input password with hash in db
+			// if same return user
 			bcrypt.compare(password, data[0].hash, (err, result) => {
 				if(result) {
 					return db.select('*').from('users')

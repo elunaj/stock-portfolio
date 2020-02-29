@@ -4,6 +4,11 @@ import { Typography } from '@material-ui/core';
 
 const PurchaseParent = (props) => {
 
+	const formatter = new Intl.NumberFormat('en-US', {
+		  style: 'currency',
+		  currency: 'USD',
+		});
+
 	// calculates stock price * quantity in 
 	// purchaseStock child component 
 	const calculateStockPurchaseCost = (stockPrice, quantity) => {
@@ -29,10 +34,11 @@ const PurchaseParent = (props) => {
                     'marginTop': '2.5rem',
                     'display': 'block'
                   }}
-                  variant="h6">Account balance:{' $'}{props.userAccountBalance}
+                  variant="h6">Account balance:{' '}{formatter.format(props.userAccountBalance)}
                 </Typography>
 
-				<PurchaseStock  
+				<PurchaseStock
+					successfulPurchase={props.successfulPurchase}
 					userAccountBalance={props.userAccountBalance}
 					userId={props.userId}
 					handleUserInputChange={props.handleUserInputChange}

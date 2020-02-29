@@ -18,6 +18,8 @@ export default class DisplayTotalWorth extends React.Component {
 		}
 	}
 
+	// finds total worth of stock
+	// and parses stockWorth 
 	findPortfolioWorth = (array) => {
 
 		const formatter = new Intl.NumberFormat('en-US', {
@@ -63,7 +65,7 @@ export default class DisplayTotalWorth extends React.Component {
 		                    'marginTop': '2.5rem',
 		                    'display': 'block'
 		                  }}
-		                  variant="h6">Worth:{this.state.portfolioTotalWorth}
+		                  variant="h6">Total Worth:{' '}{this.state.portfolioTotalWorth}
 	                </Typography>)
 
 					: null}

@@ -20,23 +20,22 @@ const initialState = {
       id: "",
       accountBalance: null
   },
-  userBalanceFound: false,
   stockSymbol: '',
   stockPrice: null,
   stockFound: false,
   totalCost: null,
-  loading: false,
   transactionGetStatus: false,
   userTransCollection: [],
   portfolioGetStatus: false,
-  userPortfolioCollection: []
+  userPortfolioCollection: [],
+  successfulPurchase: false
 };
 
 class App extends React.Component {
 constructor(props) {
   super(props);
   this.state = {
-     userQuery: '',
+    userQuery: '',
     userQuantity: null,
     typeError: false,
     route: 'signin',
@@ -49,11 +48,11 @@ constructor(props) {
     stockPrice: null,
     stockFound: false,
     totalCost: null,
-    loading: false,
     transactionGetStatus: false,
     userTransCollection: [],
     portfolioGetStatus: false,
-    userPortfolioCollection: []
+    userPortfolioCollection: [],
+    successfulPurchase: false
   };
 }
 
@@ -114,7 +113,8 @@ findStock() {
       this.setState({
         stockSymbol: stockData.symbol,
         stockPrice: Number(stockData.latestPrice),
-        stockFound: true
+        stockFound: true,
+        successfulPurchase: false
       })
     })
     .catch(err => console.log(err));
@@ -139,9 +139,9 @@ handleUserPurchase = () => {
     this.setState({user: {
       id: this.state.user.id,
       accountBalance: Number(this.state.user.accountBalance) - (Number(this.state.stockPrice) * Number(this.state.userQuantity))
-    }
-    })
-    
+      },
+      successfulPurchase: true
+    }) 
   })
   .catch(console.log)
 };
@@ -218,7 +218,7 @@ findUserPortfolio = () => {
   .catch(err => console.log)
 }
 
-// Handles views/routes depending on user clicks
+// Handles views/routes depending on user click
 onRouteChange = (route) => {
   if (route === 'signout' || route ==='signin' || 
     route ==='register') {
@@ -273,6 +273,7 @@ render() {
           ? ( 
               <div>
                 <PurchaseParent
+                  successfulPurchase={this.state.successfulPurchase}
                   findUserTransactions={this.findUserTransactions}
                   userTransCollection={[...this.state.userTransCollection]} 
                   transactionGetStatus={this.state.transactionGetStatus}  

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+// this handles IEX Cloud api call with query parameter
 router.get('/:query', (req, res) => {
 
     let userSearchInput = req.params.query;

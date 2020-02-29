@@ -1,5 +1,6 @@
 const handleProfileGet = (req, res, db) => {
 
+	// returns user profile based on id 
 	db.select('*').from('users')
 		.where('id', '=', req.params.id)
 	.then(user => {

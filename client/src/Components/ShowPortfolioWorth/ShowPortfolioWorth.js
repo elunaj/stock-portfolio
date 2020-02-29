@@ -10,7 +10,7 @@ export default class ShowPortfolioWorth extends React.Component {
 		this.state = {
 			userStockPriceCall: false,
 			newArrUpdate: false,
-  			transformArr: [],
+  			apiCallArr: [],
   			finalArr: []
 		}
 
@@ -23,12 +23,17 @@ export default class ShowPortfolioWorth extends React.Component {
 	componentDidUpdate() {
 
 		if(this.state.userStockPriceCall && !this.state.newArrUpdate) {
-			this.combineArrays(this.props.userPortfolioCollection,this.state.transformArr);
+			this.combineArrays(this.props.userPortfolioCollection, this.state.apiCallArr);
 		}
 	}
 
+	// method that makes an api call for each stock in a user's portfolio.
+	// Helps us find current price data and open vs close price.
+	// Later on we use the data from this call to merge with user's
+	// portfolio array to dynamically render user's stock worth, etc
 	getCurrentPrice = (array) => {
 
+		// creates an array of promises. One promise per stock in a user's portfolio
 		const promises = array.map(item => {
 			return fetch('http://localhost:5000/search/' + item.symbol, {
 			    method: 'GET',
@@ -39,28 +44,33 @@ export default class ShowPortfolioWorth extends React.Component {
 			})
 			.then(response => {
 				return response.json();
-			});
+			})
+			.catch(err => console.log)
 		});
 
+		// when all promises are complete and resolved, returns 
+		// result of promises in an array of the same order as original
+		// promises. Now we 
 		Promise.all(promises).then(results => {
 			results.map(item => {
 	
-				let transformArr = Object.assign({}, item);
+				const newArrayObject = Object.assign({}, item);
 
 				this.setState(prevState => ({
-					transformArr: [...prevState.transformArr, transformArr]
+					apiCallArr: [...prevState.apiCallArr, newArrayObject]
 				}))
 			})
 
 				this.setState({
 				userStockPriceCall: true
 			})
-		})	
+		})
+		.catch(err => console.log)
 	}
 
 	combineArrays = (userPort, apiCallArr) => {
 
-		// api to format stock price as USD currency value
+		// format stock price as USD currency value
 		const formatter = new Intl.NumberFormat('en-US', {
 		  style: 'currency',
 		  currency: 'USD',
@@ -69,7 +79,15 @@ export default class ShowPortfolioWorth extends React.Component {
 
 		let combinedArr = [];
 
-
+		// We're looping over each element in the userPort input 
+		// (holds user's stock ticker symbol and sum of shares 
+		// owned per stock). We then use Object.assign to
+		// add the data in userPort and the data from the 
+		// apiCallArr input (which holds current price
+		// and opening/closing price from getCurrentPrice method)to a new object.
+		// Basically, we're grouping information from two objects into one.
+		// Lastly we push each new object to combinedArr/state which
+		// becomes the arr we render 
 		for (let i = 0; i < userPort.length; i++) {
 			combinedArr.push(Object.assign({}, userPort[i], { stockWorth: formatter.format(Number(apiCallArr[i].latestPrice) * Number(userPort[i].sum))}, { openVsCurrent: Number(apiCallArr[i].latestPrice) - Number(apiCallArr[i].open)}));
 		}
@@ -83,6 +101,10 @@ export default class ShowPortfolioWorth extends React.Component {
 
 
 	render() {
+
+		{/* Each card is conditionally rendered based on
+			whether the current price is >, <, === to the 
+			opening price */}
 
 		return (
 
@@ -99,6 +121,7 @@ export default class ShowPortfolioWorth extends React.Component {
 
 				? 	(this.state.finalArr.map( (stock, i) => {
 				 			return (
+
 				 				<Card className="port" key={i}>
 							   		{stock.openVsCurrent > 0 
 
