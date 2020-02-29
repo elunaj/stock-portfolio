@@ -7,7 +7,6 @@ import PurchaseParent from './Components/PurchaseParent/PurchaseParent';
 import Transactions from './Components/Transactions/Transactions';
 import Footer from './Components/Footer/Footer';
 import { Typography } from '@material-ui/core';
-import logo from './logo.svg';
 import './App.css';
 
 // Initial app state
@@ -60,7 +59,6 @@ constructor(props) {
 
 // Loads user when signin or register is successful
 loadUser = (data) => {
-  console.log('user', data)
   this.setState({user: {
     id: data.id,
     accountBalance: Number(data.cash),
@@ -73,7 +71,6 @@ handleUserQuantityChange = (event) => {
 
   let convertedNum = Number(number);
 
-  console.log(typeof number);
   if (Number.isInteger(convertedNum) && convertedNum >= 0) {
       this.setState({
         userQuantity: convertedNum,
@@ -111,7 +108,6 @@ findStock() {
   })
     .then(res => res.json())
     .then(data => {
-      console.log('data' , data)
       return data;
     })
     .then(stockData => {
@@ -140,19 +136,17 @@ handleUserPurchase = () => {
   })
   .then(response => response.json())
   .then(tr => {
-    console.log('update user')
     this.setState({user: {
       id: this.state.user.id,
       accountBalance: Number(this.state.user.accountBalance) - (Number(this.state.stockPrice) * Number(this.state.userQuantity))
     }
     })
     
-
   })
   .catch(console.log)
 };
 
-//update user account balance after stock purchase
+//Update user account balance after stock purchase
 updateUserAccountInfo = () => {
   fetch('http://localhost:5000/profile/' + this.state.user.id, {
     method: 'get',
@@ -234,7 +228,13 @@ onRouteChange = (route) => {
       isSignedIn: true,
       initialState: initialState
     })
-  }  
+  } else if (route === 'transactions' || route === 'portfolio') {
+      this.setState({
+        stockSymbol: '',
+        stockPrice: null,
+        stockFound: false,
+    })
+  }
   this.setState({
     route: route
   })

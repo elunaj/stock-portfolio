@@ -1,9 +1,6 @@
 import React from 'react';
 import { FormControl, InputLabel, Input, FormHelperText, 
-  FormLabel, Grid, Button, Card, TextButton, TextField,
-   makeStyles, Select, MenuItem } from '@material-ui/core';
-import ReactDOMServer from 'react-dom/server';
-
+  FormLabel, Grid, Button, Card } from '@material-ui/core';
 
 const PurchaseStock = ({ handleUserStockLookUp, handleUserInputChange, 
   handleUserPurchase, stockFound, stockPrice, stockSymbol, 

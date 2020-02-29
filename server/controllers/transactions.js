@@ -1,6 +1,5 @@
 const handleTransactionAdd = (req, res, db) => {
-
-console.log('res');
+	
 	const { id, stockSymbol, userQuantity, 
 		stockPrice, totalCost, userAccountBalance } = req.body;
 

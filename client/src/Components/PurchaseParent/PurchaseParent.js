@@ -1,18 +1,12 @@
 import React from 'react';
 import PurchaseStock from '../PurchaseStock/PurchaseStock';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
-export default class Portfolio extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
+const PurchaseParent = (props) => {
 
 	// calculates stock price * quantity in 
 	// purchaseStock child component 
-	calculateStockPurchaseCost = (stockPrice, quantity) => {
+	const calculateStockPurchaseCost = (stockPrice, quantity) => {
 
 		let quantityToNum = Number(quantity);
 
@@ -27,9 +21,6 @@ export default class Portfolio extends React.Component {
 	}
 
 
-	render() {
-
-			
 		return (
 			<div>
 
@@ -38,26 +29,27 @@ export default class Portfolio extends React.Component {
                     'marginTop': '2.5rem',
                     'display': 'block'
                   }}
-                  variant="h6">Account balance:{' $'}{this.props.userAccountBalance}
+                  variant="h6">Account balance:{' $'}{props.userAccountBalance}
                 </Typography>
 
 				<PurchaseStock  
-					userAccountBalance={this.props.userAccountBalance}
-					userId={this.props.userId}
-					handleUserInputChange={this.props.handleUserInputChange}
-                    handleUserStockLookUp={this.props.handleUserStockLookUp}
-                    handleUserPurchase={this.props.handleUserPurchase}
-                    stockFound={this.props.stockFound}
-                    stockPrice={this.props.stockPrice}
-                    stockSymbol={this.props.stockSymbol}
-                    calculateStockPurchaseCost={this.state.calculateStockPurchaseCost}
-                    userQuantity={this.props.userQuantity}
-                    handleUserQuantityChange={this.props.handleUserQuantityChange}
-                    typeError={this.props.typeError}
+					userAccountBalance={props.userAccountBalance}
+					userId={props.userId}
+					handleUserInputChange={props.handleUserInputChange}
+                    handleUserStockLookUp={props.handleUserStockLookUp}
+                    handleUserPurchase={props.handleUserPurchase}
+                    stockFound={props.stockFound}
+                    stockPrice={props.stockPrice}
+                    stockSymbol={props.stockSymbol}
+                    calculateStockPurchaseCost={calculateStockPurchaseCost}
+                    userQuantity={props.userQuantity}
+                    handleUserQuantityChange={props.handleUserQuantityChange}
+                    typeError={props.typeError}
 	            />
 			</div>
 		);
-	}
 } 
+
+export default PurchaseParent;
 
 
