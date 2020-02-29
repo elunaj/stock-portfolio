@@ -2,12 +2,12 @@
 
 Stock portfolio app which allows users to buy stock, view their individual transactions, as well as the monetary worth of their portfolio holdings.
 
-##Built with 
+#Built with 
 
 ```
 Front-end: React, Material UI, HTML/CSS
 Back-end: Node, Express, Knex.js, Postgresql
 ```
-##Deployed on Heroku
+#Deployed on Heroku
 
 [View website here](https://luna-stock-trader.herokuapp.com/)
