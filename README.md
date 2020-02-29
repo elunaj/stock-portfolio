@@ -1,6 +1,6 @@
 # stock-portfolio
 
-Stock portfolio app which allows users to buy stock, view their individual transactions, as well as the monetary worth of their portfolio holdings.
+Stock portfolio app which allows users to create an account, buy stock, view their individual transactions, as well as the monetary worth of their portfolio holdings.
 
 ## Built with 
 
