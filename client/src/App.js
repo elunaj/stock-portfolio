@@ -122,7 +122,7 @@ findStock() {
 
   // Handles user purchase
 handleUserPurchase = () => {
-  fetch('https://stark-taiga-05033.herokuapp.com/transactions', {
+  fetch('https://stark-taiga-05033.herokuapp.com/transactions/', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
