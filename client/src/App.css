@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.App a img {
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
 @media (max-width: 700px) {
 	header .MuiTypography-root {
 		font-size: 1rem;

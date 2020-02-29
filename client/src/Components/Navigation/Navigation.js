@@ -29,7 +29,7 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 		                alt="Logo"
 		                  />  
 				     <Typography variant="h6">
-				      MoneyBuddy
+				      Luna-Stock-Trader
 				    </Typography>
 				    </Grid>
 
@@ -112,7 +112,7 @@ const Navigation = ( { onRouteChange, isSignedIn, email }) => {
 		                alt="Logo"
 		                  />  
 				    <Typography variant="h6">
-				       MoneyBuddy
+				       Luna-Stock-Trader
 				    </Typography>
 				    </Grid>
 
