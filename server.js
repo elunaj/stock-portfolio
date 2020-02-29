@@ -23,8 +23,6 @@ const portfolio = require('./controllers/portfolio');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Middleware
 app.use(logger('dev'));
@@ -77,11 +75,14 @@ app.get('/portfolio/:id', (req, res) => {
   portfolio.handlePortfolioGet(req, res, db);
 });
 
+// Serve static files from the React app
+app.use(express.static(__dirname + '/client/build'));
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // Port connection
 app.listen(PORT, () => {
