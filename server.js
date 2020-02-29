@@ -39,10 +39,8 @@ app.use('/search', searchRouter);
 const db = knex({
   client: 'pg',
   connection: {
-    host : 'localhost',
-    user : 'Luna23',
-    password : '',
-    database : 'stock-portfolio'
+    connectionString : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
